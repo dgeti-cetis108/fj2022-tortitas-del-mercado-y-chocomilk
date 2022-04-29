@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Saludar" android:id="@+id/MenuItemMainSaludar"/>
-    <item android:title="Ir a" android:id="@+id/MenuItemMainIrA"/>
-    <item android:title="Acerca de" android:id="@+id/MenuItemMainAcercaDe"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        app:showAsAction="never"
+        android:id="@+id/MenuItemMainSaludar"
+        android:title="Saludar" />
+    <item
+        app:showAsAction="never"
+        android:id="@+id/MenuItemMainIrA"
+        android:title="Ir a" />
+    <item
+        app:showAsAction="always"
+        android:icon="@drawable/ic_acerca_de_24dp"
+        android:id="@+id/MenuItemMainAcercaDe"
+        android:title="Acerca de" />
 </menu>
