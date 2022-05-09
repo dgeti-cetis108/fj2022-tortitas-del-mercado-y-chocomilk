@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
@@ -17,6 +18,46 @@ class ImplicitIntentsActivity : AppCompatActivity() {
         addActionToButtonWeb()
         addActionToButtonPhone()
         addActionToButtonCamera()
+        addActiontoButtonEmail()
+        addActionToButtonSms()
+    }
+
+    private fun addActionToButtonSms() {
+        // obtener el enlace al botonSms
+        val buttonSms = findViewById<Button>(R.id.buttonImplicitIntentSms)
+        // agregar la acción al botonSms
+        buttonSms.setOnClickListener {
+            // definir el número telefónico a donde enviar el SMS
+            val number = "+526871234567"
+            // definir el mensaje a enviar
+            val message = "Hello, this is a Message from Android"
+            // crear el intent para enviar mensaje
+            val intentSms = Intent().apply {
+                action = Intent.ACTION_SENDTO
+                data = Uri.parse("smsto:$number")
+                putExtra("sms_body", message)
+            }
+            // llamar al intent
+            startActivity(intentSms)
+        }
+    }
+
+    private fun addActiontoButtonEmail() {
+        // obtener el enlace al botonEmail
+        val buttonEmail = findViewById<Button>(R.id.buttonImplicitIntentEmail)
+        // agregar la acción al botonEmail
+        buttonEmail.setOnClickListener {
+            val from = Uri.parse("bidkar@cetis108.edu.mx")
+            val to = Uri.parse("grupo.6avpr@cetis108.edu.mx")
+            val subject = "Mensaje enviado desde Android"
+            val message = "hola, te escribo para demostrar que se puede hacer desde mi app"
+            val intentEmail = Intent(Intent.ACTION_SEND, from)
+            intentEmail.putExtra(Intent.EXTRA_SUBJECT, subject)
+            intentEmail.putExtra(Intent.EXTRA_TEXT, message)
+            intentEmail.putExtra(Intent.EXTRA_EMAIL, to)
+            intentEmail.type = "text/plain"
+            startActivity(Intent.createChooser(intentEmail, "Enviar correo con:"))
+        }
     }
 
     private fun addActionToButtonCamera() {
